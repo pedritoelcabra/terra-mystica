@@ -248,6 +248,21 @@ function savePlan() {
     loadOrSavePlan(true);
 }
 
+function applyPlan() {
+	let planTextArea = document.getElementById('planning_entry_input');
+	let planRows = planTextArea.value.trim().split('\n');
+	if (!planRows.length) {
+		return;
+	}
+	let firstRow = planRows.shift();
+	planTextArea.value = planRows.join('\n');
+	// savePlan();
+	dataEntrySelect("move");
+	updateMovePicker();
+	document.getElementById('move_entry_input').value = firstRow;
+	preview();
+}
+
 var plan_loaded = 0;
 function initPlanIfNeeded() {
     if (plan_loaded) {
